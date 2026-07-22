@@ -2,7 +2,7 @@
 
 Japanese README is available here: [README_ja.md](./README_ja.md)
 
-A CLI that streamlines creating GitHub Gists, so you can quickly jot down things you notice or learn while developing and register them as Tips.
+An interactive CLI that lets you easily create small Tips articles—including the reasoning and background behind them—as GitHub Gists.
 
 ## What you get from this repository
 
