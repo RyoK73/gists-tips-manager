@@ -13,7 +13,7 @@ CLIでGithub Gist作成を簡略化し、開発中の気づいたこと・メモ
 1. `sudo pacman -S gum github-cli`
 2. `git clone https://github.com/RyoK73/gists-tips-manager.git`
 3. `cd gists-tips-manager`
-4. `./scripts/setup-manager.sh`
+4. `./scripts/setup-manager.zsh`
 5. `source $HOME/.zshrc`
 
 ## 動作環境
@@ -36,7 +36,7 @@ CLIでGithub Gist作成を簡略化し、開発中の気づいたこと・メモ
 ├── docs
 ├── scripts
 │   ├── gists-tips-manager.zsh
-│   └── setup-manager.sh
+│   └── setup-manager.zsh
 └── tips
 ```
 
