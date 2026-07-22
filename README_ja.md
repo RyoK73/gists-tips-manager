@@ -2,7 +2,7 @@
 
 English README is available here: [README.md](./README.md)
 
-CLIでGitHub Gist作成を簡略化し、開発中の気づいたこと・メモなどを気軽にTipsとして登録することができる
+作成理由・背景も含めた小さなTips記事をGithub Gistとして手軽に作成できる対話式CLI
 
 ## このリポジトリで得られるもの
 
