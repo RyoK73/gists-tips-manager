@@ -1,14 +1,16 @@
 ## gists-tips-manager
 
-CLIでGithub Gist作成を簡略化し、開発中の気づいたこと・メモなどを気軽にTipsとして登録することができる
+Japanese README is available here: [README_ja.md](./README_ja.md)
 
-## このリポジトリで得られるもの
+A CLI that streamlines creating GitHub Gists, so you can quickly jot down things you notice or learn while developing and register them as Tips.
 
-- TipsとしてGithub Gistを作成するためのCLIコマンド
-- Tipsの説明・背景などをGistに書き込むための対話式UI
-- Github Gistに作成されたTipsをブログ・サービスなどで利用可能にするGithub APIを通したパース実装
+## What you get from this repository
 
-## インストール方法
+- A CLI command for creating Tips as GitHub Gists
+- An interactive UI for writing a Tip's description and background into a Gist
+- A parsing implementation built on the GitHub API, so Tips created as GitHub Gists can be consumed by blogs and other services
+
+## Installation
 
 1. `sudo pacman -S gum github-cli`
 2. `git clone https://github.com/RyoK73/gists-tips-manager.git`
@@ -16,49 +18,50 @@ CLIでGithub Gist作成を簡略化し、開発中の気づいたこと・メモ
 4. `./scripts/setup-manager.zsh`
 5. `source $HOME/.zshrc`
 
-## 動作環境
+## Requirements
 
 ### OS
 
 - Arch Linux
 
-### シェル
+### Shell
 
 - zsh
 
-## 構成
+## Structure
 
 ```bash
 ├── LICENSE
 ├── README.md
+├── README_ja.md
 ├── assets
-│   └── assets.json
+│   └── assets.json
 ├── docs
 ├── scripts
-│   ├── gists-tips-manager.zsh
-│   └── setup-manager.zsh
+│   ├── gists-tips-manager.zsh
+│   └── setup-manager.zsh
 └── tips
 ```
 
-## 依存ライブラリ
+## Dependencies
 
 - [gum](https://github.com/charmbracelet/gum.git)
-- [Github CLI](https://github.com/cli/cli.git)
+- [GitHub CLI](https://github.com/cli/cli.git)
 
-## コマンド
+## Commands
 
-`./scripts/gists-tips-manager.zsh`に実装
+Implemented in `./scripts/gists-tips-manager.zsh`
 
-| コマンド             | 役割                                           |
-| -------------------- | ---------------------------------------------- |
-| setup-manager        | コマンドを`.zshrc`に読み込む。初回セットアップ |
-| tip-new(実装予定)    | フロントマターを対話入力 -> $EDITORで本文執筆  |
-| tip-list(実装予定)   | tips一覧をstatusつきで表示                     |
-| tip-update(実装予定) | 公開済みgistの内容を`gh gist edit`で更新       |
+| Command               | Role                                                       |
+| ---------------------- | ----------------------------------------------------------- |
+| setup-manager          | Loads the commands into `.zshrc`. Initial setup.            |
+| tip-new (planned)      | Interactively fill in the frontmatter, then write the body in `$EDITOR` |
+| tip-list (planned)     | List Tips along with their status                            |
+| tip-update (planned)   | Update a published Gist's content via `gh gist edit`         |
 
-## フロントマター
+## Frontmatter
 
-### 記述方法
+### Format
 
 ```md
 ---
@@ -74,16 +77,16 @@ gist_url:""
 ---
 ```
 
-### フロントマターの役割
+### Frontmatter fields
 
-| フロントマター | 役割                         | 値                                   |
-| -------------- | ---------------------------- | ------------------------------------ |
-| title          | タイトル                     | -                                    |
-| summary        | tipの簡単な説明文            | -                                    |
-| tags           | tipsのタグ                   | `./assets/assets.json`から選んだ配列 |
-| lang           | tips内で紹介する言語         | `./assets/assets.json`から選んだ配列 |
-| created_at     | 作成日                       | `yy-MM-dd`で表記される文字列         |
-| updated_at     | 更新日                       | `yy-MM-dd`で表記される文字列         |
-| status         | tipファイルの状態            | `draft`,`uploaded`のどちらか         |
-| gist_id        | gistsとして登録したときのid  | -                                    |
-| gist_url       | gistsとして登録したときのURL | -                                    |
+| Field       | Role                                    | Value                                          |
+| ----------- | ---------------------------------------- | ----------------------------------------------- |
+| title       | Title                                    | -                                                |
+| summary     | A short description of the Tip           | -                                                |
+| tags        | Tags for the Tip                         | Array chosen from `./assets/assets.json`         |
+| lang        | Language(s) covered in the Tip           | Array chosen from `./assets/assets.json`         |
+| created_at  | Creation date                            | String formatted as `yy-MM-dd`                    |
+| updated_at  | Last updated date                        | String formatted as `yy-MM-dd`                    |
+| status      | State of the Tip file                    | Either `draft` or `uploaded`                     |
+| gist_id     | ID assigned when registered as a Gist    | -                                                |
+| gist_url    | URL assigned when registered as a Gist   | -                                                |

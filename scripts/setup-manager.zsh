@@ -8,12 +8,12 @@ ZSHRC="${HOME}/.zshrc"
 SOURCE_LINE="source \"${MANAGER_SCRIPT}\""
 
 if [[ ! -f "${ZSHRC}" ]]; then
-  echo ".zshrcが見つかりません"
-  if gum confirm ".zshrcを作成しますか？";then
+  echo ".zshrc not found"
+  if gum confirm "Create .zshrc?";then
     touch $HOME/.zshrc
-    echo "${HOME}に.zshrcを作成しました"
+    echo "Created .zshrc at ${HOME}"
   else
-    echo "キャンセルされました"
+    echo "Cancelled"
     exit 1
   fi
 fi
