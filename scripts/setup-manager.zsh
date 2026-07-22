@@ -8,8 +8,14 @@ ZSHRC="${HOME}/.zshrc"
 SOURCE_LINE="source \"${MANAGER_SCRIPT}\""
 
 if [[ ! -f "${ZSHRC}" ]]; then
-  echo "Error: ${ZSHRC} not found." >&2
-  exit 1
+  echo ".zshrcが見つかりません"
+  if gum confirm ".zshrcを作成しますか？";then
+    touch $HOME/.zshrc
+    echo "${HOME}に.zshrcを作成しました"
+  else
+    echo "キャンセルされました"
+    exit 1
+  fi
 fi
 
 if grep -qF "${MANAGER_SCRIPT}" "${ZSHRC}"; then
