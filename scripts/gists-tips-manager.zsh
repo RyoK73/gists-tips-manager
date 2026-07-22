@@ -2,6 +2,15 @@
 
 set -eo pipefail
 
+function print-launch-message() {
+  local title=$1 subtitle=$2
+  gum style \
+    --foreground="#ffffff" --border-foreground="#00b5cb" \
+    --border=double --align=center \
+    --width=50 --margin="1 2" --padding="2 4" \
+    "$title" "$subtitle"
+}
+
 function tip-new() {
   assets_status=(draft uploaded)
 
