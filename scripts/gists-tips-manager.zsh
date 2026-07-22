@@ -12,17 +12,17 @@ function print-launch-message() {
 }
 
 function tip-new() {
-  assets_status=(draft uploaded)
+  local assets_status=(draft uploaded)
 
-  SCIRPT_DIR="$(cd "$(dirname "${(%):-%x}")" && pwd)"
-  ASSETS_JSON="${SCIRPT_DIR}/../assets/assets.json"
-  assets_tags="$(jq -r '.tags | sort | .[]' "$ASSETS_JSON")"
-  assets_lang="$(jq -r '.lang | sort | .[]' "$ASSETS_JSON")"
+  local SCIRPT_DIR="$(cd "$(dirname "${(%):-%x}")" && pwd)"
+  local ASSETS_JSON="${SCIRPT_DIR}/../assets/assets.json"
+  local assets_tags="$(jq -r '.tags | sort | .[]' "$ASSETS_JSON")"
+  local assets_lang="$(jq -r '.lang | sort | .[]' "$ASSETS_JSON")"
 
-  title=$(gum input --placeholder=タイトルを入力してください)
-  summary=$(gum write --cursor.mode=blink --header=サマリーを入力してください)
-  tags=$(gum choose --no-limit <<<"$assets_tags")
-  lang=$(gum choose --no-limit <<<"$assets_lang")
+  local title=$(gum input --placeholder=タイトルを入力してください)
+  local summary=$(gum write --cursor.mode=blink --header=サマリーを入力してください)
+  local tags=$(gum choose --no-limit <<<"$assets_tags")
+  local lang=$(gum choose --no-limit <<<"$assets_lang")
   # created_at
   # updated_at
   # gist_id
