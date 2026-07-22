@@ -49,12 +49,12 @@ CLIでGithub Gist作成を簡略化し、開発中の気づいたこと・メモ
 
 `./scripts/gists-tips-manager.zsh`に実装
 
-| コマンド      | 役割                                           |
-| ------------- | ---------------------------------------------- |
-| setup-manager | コマンドを`.zshrc`に読み込む。初回セットアップ |
-| tip-new       | フロントマターを対話入力 -> $EDITORで本文執筆  |
-| tip-list      | tips一覧をstatusつきで表示                     |
-| tip-update    | 公開済みgistの内容を`gh gist edit`で更新       |
+| コマンド             | 役割                                           |
+| -------------------- | ---------------------------------------------- |
+| setup-manager        | コマンドを`.zshrc`に読み込む。初回セットアップ |
+| tip-new(実装予定)    | フロントマターを対話入力 -> $EDITORで本文執筆  |
+| tip-list(実装予定)   | tips一覧をstatusつきで表示                     |
+| tip-update(実装予定) | 公開済みgistの内容を`gh gist edit`で更新       |
 
 ## フロントマター
 
