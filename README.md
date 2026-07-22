@@ -52,12 +52,12 @@ A CLI that streamlines creating GitHub Gists, so you can quickly jot down things
 
 Implemented in `./scripts/gists-tips-manager.zsh`
 
-| Command               | Role                                                       |
-| ---------------------- | ----------------------------------------------------------- |
-| setup-manager          | Loads the commands into `.zshrc`. Initial setup.            |
-| tip-new (planned)      | Interactively fill in the frontmatter, then write the body in `$EDITOR` |
-| tip-list (planned)     | List Tips along with their status                            |
-| tip-update (planned)   | Update a published Gist's content via `gh gist edit`         |
+| Command              | Role                                                                    |
+| -------------------- | ----------------------------------------------------------------------- |
+| setup-manager        | Loads the commands into `.zshrc`. Initial setup.                        |
+| tip-new (planned)    | Interactively fill in the frontmatter, then write the body in `$EDITOR` |
+| tip-list (planned)   | List Tips along with their status                                       |
+| tip-update (planned) | Update a published Gist's content via `gh gist edit`                    |
 
 ## Frontmatter
 
@@ -79,14 +79,14 @@ gist_url:""
 
 ### Frontmatter fields
 
-| Field       | Role                                    | Value                                          |
-| ----------- | ---------------------------------------- | ----------------------------------------------- |
-| title       | Title                                    | -                                                |
-| summary     | A short description of the Tip           | -                                                |
-| tags        | Tags for the Tip                         | Array chosen from `./assets/assets.json`         |
-| lang        | Language(s) covered in the Tip           | Array chosen from `./assets/assets.json`         |
-| created_at  | Creation date                            | String formatted as `yy-MM-dd`                    |
-| updated_at  | Last updated date                        | String formatted as `yy-MM-dd`                    |
-| status      | State of the Tip file                    | Either `draft` or `uploaded`                     |
-| gist_id     | ID assigned when registered as a Gist    | -                                                |
-| gist_url    | URL assigned when registered as a Gist   | -                                                |
+| Field      | Role                                   | Value                                    |
+| ---------- | -------------------------------------- | ---------------------------------------- |
+| title      | Title                                  | -                                        |
+| summary    | A short description of the Tip         | -                                        |
+| tags       | Tags for the Tip                       | Array chosen from `./assets/assets.json` |
+| lang       | Language(s) covered in the Tip         | Array chosen from `./assets/assets.json` |
+| created_at | Creation date                          | String formatted as `yy-MM-dd`           |
+| updated_at | Last updated date                      | String formatted as `yy-MM-dd`           |
+| status     | State of the Tip file                  | Either `draft` or `uploaded`             |
+| gist_id    | ID assigned when registered as a Gist  | -                                        |
+| gist_url   | URL assigned when registered as a Gist | -                                        |

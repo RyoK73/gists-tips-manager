@@ -2,13 +2,13 @@
 
 English README is available here: [README.md](./README.md)
 
-CLIでGithub Gist作成を簡略化し、開発中の気づいたこと・メモなどを気軽にTipsとして登録することができる
+CLIでGitHub Gist作成を簡略化し、開発中の気づいたこと・メモなどを気軽にTipsとして登録することができる
 
 ## このリポジトリで得られるもの
 
-- TipsとしてGithub Gistを作成するためのCLIコマンド
+- TipsとしてGitHub Gistを作成するためのCLIコマンド
 - Tipsの説明・背景などをGistに書き込むための対話式UI
-- Github Gistに作成されたTipsをブログ・サービスなどで利用可能にするGithub APIを通したパース実装
+- GitHub Gistに作成されたTipsをブログ・サービスなどで利用可能にするGitHub APIを通したパース実装
 
 ## インストール方法
 
@@ -46,7 +46,7 @@ CLIでGithub Gist作成を簡略化し、開発中の気づいたこと・メモ
 ## 依存ライブラリ
 
 - [gum](https://github.com/charmbracelet/gum.git)
-- [Github CLI](https://github.com/cli/cli.git)
+- [GitHub CLI](https://github.com/cli/cli.git)
 
 ## コマンド
 
