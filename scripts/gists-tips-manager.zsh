@@ -12,11 +12,10 @@ function print-launch-message() {
 }
 
 function tip-new() {
-  local assets_status=(draft uploaded)
+  # ファイルパスの設定
   local SCIRPT_DIR="$(cd "$(dirname "${(%):-%x}")" && pwd)"
   local ASSETS_JSON="$(cd "${SCIRPT_DIR}/../assets" && pwd)/assets.json"
-  local assets_category="$(jq -r '.category | sort | .[]' "${ASSETS_JSON}")"
-  local assets_lang="$(jq -r '.lang | sort | .[]' "${ASSETS_JSON}")"
+  local save_dir="$(cd "${SCIRPT_DIR}/../tips" && pwq)"
 
   local assets_category="$(jq -r '.category | sort | .[]' "${ASSETS_JSON}")"
   local assets_language="$(jq -r '.language | sort | .[].name' "${ASSETS_JSON}")"
@@ -27,11 +26,7 @@ function tip-new() {
   local filename="$(gum input --placeholder=ファイル名を入力してください)
 "
   local title="$(gum input --placeholder=タイトルを入力してください)"
-  local category="$(gum choose --header=タグを選んでください --no-limit <<<"${assets_category}")"
-  local category_yaml="[$(echo "${category}" | paste -sd, - | sed 's/,/, /g')]"
-  local lang="$(gum choose --header=言語を選んでください --no-limit <<<"${assets_lang}")"
-  local created_date="$(date "+%Y-%m-%d")"
-  local save_dir="$(cd "${SCIRPT_DIR}/../tips" && pwq)"
+  local category="$(gum filter --header=タグを選んでください --no-limit <<<"${assets_category}")"
 
   local language="$(gum filter --header=言語を選んでください --limit 1 <<<"${assets_language}")"
   local file-ext="$(jq -r '.language[] | select(.name=="${assets_language}") | .ext')"
@@ -51,12 +46,10 @@ function tip-new() {
 EOF
 
   if $(gum confirm "${EDITOR}で開きますか？"); then
-    $EDITOR "$fullpath"
+    $EDITOR "${fullpath}"
   else
-    echo "${fullpath}に作成しました"
+    echo "$(dirname "${fullpath}")に作成しました"
   fi
-  # gist_id
-  # gist_url
 }
 
 tip-new
