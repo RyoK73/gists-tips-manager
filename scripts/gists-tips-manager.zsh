@@ -30,8 +30,9 @@ function tip-new() {
   local title="$(gum input --placeholder=タイトルを入力してください)"
   local category="$(gum filter --header=タグを選んでください --no-limit <<<"${assets_category}")"
 
-  local language="$(gum filter --header=言語を選んでください --limit 1 <<<"${assets_language}")"
-  local file-ext="$(jq -r '.language[] | select(.name=="${assets_language}") | .ext')"
+  local language="$(gum filter --header=言語を選んでください <<<"${assets_language}")"
+
+  local extension="$(jq -r --arg lang "${language}" '.language[] | select(.name=="$lang") | .ext' "${ASSETS_JSON}")" # ファイル拡張子を特定
 
   local created_date="$(date "+%Y-%m-%d")"
   local category_yaml="[$(echo "${category}" | paste -sd, - | sed 's/,/, /g')]"
