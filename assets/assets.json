@@ -1,4 +1,4 @@
 {
-  "tags": ["cheatsheet", "template", "memo"],
+  "category": ["cheatsheet", "template", "memo"],
   "lang": ["bash", "typescript", "python", "javascript"]
 }
