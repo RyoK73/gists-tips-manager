@@ -20,12 +20,13 @@ function tip-new() {
 
   print-launch-message "Let's Create Tips !"
 
-  local filename=$(gum input --placeholder=ファイル名を入力してください)
-  local title=$(gum input --placeholder=タイトルを入力してください)
-  local tags=$(gum choose --header=タグを選んでください --no-limit <<<"${assets_tags}")
-  local lang=$(gum choose --header=言語を選んでください --no-limit <<<"${assets_lang}")
-  local created_date=$(date "+%Y-%m-%d")
-  local save_dir=$(cd "${SCIRPT_DIR}/../tips" && pwq)
+  local filename="$(gum input --placeholder=ファイル名を入力してください)
+"
+  local title="$(gum input --placeholder=タイトルを入力してください)"
+  local tags="$(gum choose --header=タグを選んでください --no-limit <<<"${assets_tags}")"
+  local lang="$(gum choose --header=言語を選んでください --no-limit <<<"${assets_lang}")"
+  local created_date="$(date "+%Y-%m-%d")"
+  local save_dir="$(cd "${SCIRPT_DIR}/../tips" && pwq)"
 
   echo \
     "---
