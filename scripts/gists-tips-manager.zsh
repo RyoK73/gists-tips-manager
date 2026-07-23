@@ -14,7 +14,7 @@ function print-launch-message() {
 function tip-new() {
   local assets_status=(draft uploaded)
   local SCIRPT_DIR="$(cd "$(dirname "${(%):-%x}")" && pwd)"
-  local ASSETS_JSON="${SCIRPT_DIR}/../assets/assets.json"
+  local ASSETS_JSON="$(cd "${SCIRPT_DIR}/../assets" && pwd)/assets.json"
   local assets_tags="$(jq -r '.tags | sort | .[]' "${ASSETS_JSON}")"
   local assets_lang="$(jq -r '.lang | sort | .[]' "${ASSETS_JSON}")"
 
@@ -25,7 +25,7 @@ function tip-new() {
   local tags=$(gum choose --header=タグを選んでください --no-limit <<<"${assets_tags}")
   local lang=$(gum choose --header=言語を選んでください --no-limit <<<"${assets_lang}")
   local created_date=$(date "+%Y-%m-%d")
-  local save_dir="${SCIRPT_DIR}/../tips/${created_date}_${filename}"
+  local save_dir=$(cd "${SCIRPT_DIR}/../tips" && pwq)
 
   echo \
     "---
