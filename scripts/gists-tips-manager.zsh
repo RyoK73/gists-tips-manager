@@ -18,7 +18,7 @@ function tip-new() {
   local assets_category="$(jq -r '.category | sort | .[]' "${ASSETS_JSON}")"
   local assets_lang="$(jq -r '.lang | sort | .[]' "${ASSETS_JSON}")"
 
-  print-launch-message "Let's Create Tips !"
+  print-launch-message "Let's Create Tips !" "Choose Tips Option !!"
 
   local filename="$(gum input --placeholder=ファイル名を入力してください)
 "
