@@ -14,8 +14,10 @@ function print-launch-message() {
 function tip-new() {
   # ファイルパスの設定
   local SCIRPT_DIR="$(cd "$(dirname "${(%):-%x}")" && pwd)"
-  local ASSETS_JSON="$(cd "${SCIRPT_DIR}/../assets" && pwd)/assets.json"
-  local save_dir="$(cd "${SCIRPT_DIR}/../tips" && pwq)"
+  local REPO_DIR="$(realpath "${SCIRPT_DIR}/../")"
+
+  local ASSETS_JSON="${REPO_DIR}/assets/assets.json"
+  local TIPS_DIR="${REPO_DIR}/tips"
 
   local assets_category="$(jq -r '.category | sort | .[]' "${ASSETS_JSON}")"
   local assets_language="$(jq -r '.language | sort | .[].name' "${ASSETS_JSON}")"
