@@ -18,6 +18,10 @@ function tip-new() {
   local assets_category="$(jq -r '.category | sort | .[]' "${ASSETS_JSON}")"
   local assets_lang="$(jq -r '.lang | sort | .[]' "${ASSETS_JSON}")"
 
+  local assets_category="$(jq -r '.category | sort | .[]' "${ASSETS_JSON}")"
+  local assets_language="$(jq -r '.language | sort | .[].name' "${ASSETS_JSON}")"
+
+  # 対話開始
   print-launch-message "Let's Create Tips !" "Choose Tips Option !!"
 
   local filename="$(gum input --placeholder=ファイル名を入力してください)
@@ -29,8 +33,17 @@ function tip-new() {
   local created_date="$(date "+%Y-%m-%d")"
   local save_dir="$(cd "${SCIRPT_DIR}/../tips" && pwq)"
 
-  echo \
-    "---
+  local language="$(gum filter --header=言語を選んでください --limit 1 <<<"${assets_language}")"
+  local file-ext="$(jq -r '.language[] | select(.name=="${assets_language}") | .ext')"
+
+  local created_date="$(date "+%Y-%m-%d")"
+  local category_yaml="[$(echo "${category}" | paste -sd, - | sed 's/,/, /g')]"
+  
+  local fullpath="${save_dir}/${created_date}-${filename}.yaml"
+
+  touch ${fullpath}
+  echo <<-EOF >"${save_dir}/${created_date}-${filename}.meta.yaml"
+    ---
     title: ${title}
     category: ${category_yaml}
     created_at: ${created_date}
