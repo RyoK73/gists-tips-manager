@@ -2,6 +2,12 @@
 
 set -eo pipefail
 
+typeset -g SCRIPT_DIR="$(cd "$(dirname "${(%):-%x}")" && pwd)"
+typeset -g REPO_DIR="$(realpath "${SCRIPT_DIR}/../")"
+typeset -g ASSETS_JSON="${REPO_DIR}/assets/assets.json"
+typeset -g TIPS_DIR="${REPO_DIR}/tips"
+typeset -g TIPS_GIST_FILTER='\[Tips\]'
+
 function print-launch-message() {
   local title=$1 subtitle=$2
   gum style \
@@ -12,13 +18,6 @@ function print-launch-message() {
 }
 
 function tip-new() {
-  # ファイルパスの設定
-  local SCIRPT_DIR="$(cd "$(dirname "${(%):-%x}")" && pwd)"
-  local REPO_DIR="$(realpath "${SCIRPT_DIR}/../")"
-
-  local ASSETS_JSON="${REPO_DIR}/assets/assets.json"
-  local TIPS_DIR="${REPO_DIR}/tips"
-
   local assets_category="$(jq -r '.category | sort | .[]' "${ASSETS_JSON}")"
   local assets_language="$(jq -r '.language | sort | .[].name' "${ASSETS_JSON}")"
 
