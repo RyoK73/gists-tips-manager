@@ -12,7 +12,7 @@ English README is available here: [README.md](./README.md)
 
 ## インストール方法
 
-1. `sudo pacman -S gum github-cli`
+1. `sudo pacman -S gum github-cli yq jq`
 2. `git clone https://github.com/RyoK73/gists-tips-manager.git`
 3. `cd gists-tips-manager`
 4. `./scripts/setup-manager.zsh`
@@ -47,6 +47,8 @@ English README is available here: [README.md](./README.md)
 
 - [gum](https://github.com/charmbracelet/gum.git)
 - [GitHub CLI](https://github.com/cli/cli.git)
+- [jq](https://github.com/jqlang/jq)
+- [yq (kislyuk/yq)](https://github.com/kislyuk/yq) — jqラッパー形式のYAMLパーサー。meta.yamlの読み書きに使用
 
 ## コマンド
 
