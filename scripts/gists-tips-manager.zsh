@@ -122,3 +122,54 @@ function tip-list() {
   browse-gist-list --print
 }
 
+function tip-edit() {
+  print-launch-message "Edit Tips !" "Choose Tips to Edit !!"
+
+  local selected_id="$(browse-gist-list --return-column=1)"
+
+  if [[ -z "${selected_id}" ]]; then
+    echo "編集対象が選択されませんでした"
+    return
+  fi
+
+  local tip_dir="" dir meta
+  for dir in "${TIPS_DIR}"/*(/N); do
+    meta=("${dir}"/*.meta.yaml(N))
+    [[ -n "${meta[1]}" ]] || continue
+    if [[ "$(yq -r '.gist_id' "${meta[1]}")" == "${selected_id}" ]]; then
+      tip_dir="${dir}"
+      break
+    fi
+  done
+
+  if [[ -z "${tip_dir}" ]]; then
+    # ローカルに未取得（他PC等でアップロードされた）tipなのでgist_cloneで取得する
+    local tmp_dir="$(mktemp -d)"
+    gh gist clone "${selected_id}" "${tmp_dir}"
+
+    local remote_meta remote_content line
+    while IFS= read -r line; do
+      case "${line}" in
+      meta:*) remote_meta="${line#meta:}" ;;
+      content:*) remote_content="${line#content:}" ;;
+      esac
+    done < <(resolve-tip-files "${tmp_dir}")
+
+    local created_at="$(yq -r '.created_at' "${remote_meta}")"
+    local stem="$(basename "${remote_content}" | sed -E 's/\.[^.]+$//')"
+    tip_dir="${TIPS_DIR}/${created_at}-${stem}"
+
+    mkdir -p "${TIPS_DIR}"
+    mv "${tmp_dir}" "${tip_dir}"
+  fi
+
+  local meta_file content_file line
+  while IFS= read -r line; do
+    case "${line}" in
+    meta:*) meta_file="${line#meta:}" ;;
+    content:*) content_file="${line#content:}" ;;
+    esac
+  done < <(resolve-tip-files "${tip_dir}")
+
+  edit-and-maybe-upload "${tip_dir}" "$(basename "${content_file}")"
+}
