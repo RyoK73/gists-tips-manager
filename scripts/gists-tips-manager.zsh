@@ -82,19 +82,16 @@ function tip-new() {
   # 対話開始
   print-launch-message "Let's Create Tips !" "Choose Tips Option !!"
 
-  local filename="$(gum input --placeholder=ファイル名を入力してください)
-"
+  local filename="$(gum input --placeholder=ファイル名を入力してください)"
   local title="$(gum input --placeholder=タイトルを入力してください)"
   local category="$(gum filter --header=タグを選んでください --no-limit <<<"${assets_category}")"
 
   local language="$(gum filter --header=言語を選んでください <<<"${assets_language}")"
 
-  local extension="$(jq -r --arg lang "${language}" '.language[] | select(.name=="$lang") | .ext' "${ASSETS_JSON}")" # ファイル拡張子を特定
+  local extension="$(jq -r --arg lang "${language}" '.language[] | select(.name==$lang) | .ext' "${ASSETS_JSON}")" # ファイル拡張子を特定
 
   local created_date="$(date "+%Y-%m-%d")"
-  local category_yaml="[$(echo "${category}" | paste -sd, - | sed 's/,/, /g')]"
-  
-  local fullpath="${save_dir}/${created_date}-${filename}.yaml"
+  local category_yaml="[$(echo "${category}" | paste -sd, - | sed 's/,/, /g')]" # yaml形式の配列に変換
 
   touch ${fullpath}
   echo <<-EOF >"${save_dir}/${created_date}-${filename}.meta.yaml"
