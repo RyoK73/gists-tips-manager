@@ -1,7 +1,5 @@
 #!/usr/bin/env zsh
 
-set -eo pipefail
-
 typeset -g SCRIPT_DIR="$(cd "$(dirname "${(%):-%x}")" && pwd)"
 typeset -g REPO_DIR="$(realpath "${SCRIPT_DIR}/../")"
 typeset -g ASSETS_JSON="${REPO_DIR}/assets/assets.json"
@@ -9,6 +7,7 @@ typeset -g TIPS_DIR="${REPO_DIR}/tips"
 typeset -g TIPS_GIST_FILTER='\[Tips\]'
 
 function print-launch-message() {
+  setopt local_options err_exit pipe_fail
   local title=$1 subtitle=$2
   gum style \
     --foreground="#ffffff" --border-foreground="#00b5cb" \
@@ -19,6 +18,7 @@ function print-launch-message() {
 
 # tip_dirにある*.meta.yamlとそれ以外のコンテンツファイルをそれぞれ1つずつ特定する
 function resolve-tip-files() {
+  setopt local_options err_exit pipe_fail
   local tip_dir=$1
   local f
   for f in "${tip_dir}"/*(.N); do
@@ -32,6 +32,7 @@ function resolve-tip-files() {
 
 # gist_idが空ならgh gist createで新規作成しmeta.yamlに書き戻す、あればgh gist editで上書きする
 function upload-tip() {
+  setopt local_options err_exit pipe_fail
   local tip_dir=$1
   local meta_file content_file line
 
@@ -59,8 +60,9 @@ function upload-tip() {
 
 # 補助関数(tip-editとは別役割)
 # $EDITORでコンテンツファイルを開き、正常終了した場合のみアップロード確認する
-# （$EDITORが異常終了した場合はset -eによりここで処理が止まり、アップロードされない）
+# （$EDITORが異常終了した場合はerr_exitオプションによりここで処理が止まり、アップロードされない）
 function edit-and-maybe-upload() {
+  setopt local_options err_exit pipe_fail
   local tip_dir=$1 content_file=$2
 
   if ! gum confirm "${EDITOR}で開きますか？"; then
@@ -76,6 +78,7 @@ function edit-and-maybe-upload() {
 }
 
 function tip-new() {
+  setopt local_options err_exit pipe_fail
   local assets_category="$(jq -r '.category | sort | .[]' "${ASSETS_JSON}")"
   local assets_language="$(jq -r '.language | sort | .[].name' "${ASSETS_JSON}")"
 
@@ -111,18 +114,21 @@ function tip-new() {
 }
 
 function browse-gist-list() {
+  setopt local_options err_exit pipe_fail
   gh gist list --filter "${TIPS_GIST_FILTER}" |
     gum table --separator=$'\t' --columns="ID,Description,Files,Visibility,UpdatedAt" "$@"
 
 }
 
 function tip-list() {
+  setopt local_options err_exit pipe_fail
   print-launch-message "Your Tips !" "Browse Tips List !!"
 
   browse-gist-list --print
 }
 
 function tip-edit() {
+  setopt local_options err_exit pipe_fail
   print-launch-message "Edit Tips !" "Choose Tips to Edit !!"
 
   local selected_id="$(browse-gist-list --return-column=1)"
