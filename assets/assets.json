@@ -1,5 +1,13 @@
 {
-  "category": ["cheatsheet", "template", "memo"],
+  "category": [
+    "cheatsheet",
+    "template",
+    "memo",
+    "howto",
+    "troubleshooting",
+    "review",
+    "setting"
+  ],
   "language": [
     { "name": "bash", "ext": "sh" },
     { "name": "css", "ext": "css" },
