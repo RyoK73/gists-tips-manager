@@ -102,12 +102,10 @@ function tip-new() {
   mkdir -p "${tip_dir}"
   touch "${tip_dir}/${filename}.${extension}"
   cat <<-EOF >"${tip_dir}/${filename}.meta.yaml"
-	---
 	title: ${title}
 	category: ${category_yaml}
 	created_at: ${created_date}
 	gist_id: ""
-	---
 	EOF
 
   edit-and-maybe-upload "${tip_dir}" "${filename}.${extension}"
