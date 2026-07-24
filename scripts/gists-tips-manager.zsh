@@ -107,7 +107,7 @@ function tip-new() {
 	category: ${category_yaml}
 	created_at: ${created_date}
 	gist_id: ""
-  ---
+	---
 	EOF
 
   edit-and-maybe-upload "${tip_dir}" "${filename}.${extension}"
