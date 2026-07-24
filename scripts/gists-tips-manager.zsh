@@ -112,4 +112,15 @@ EOF
   fi
 }
 
-tip-new
+function browse-gist-list() {
+  gh gist list --filter "${TIPS_GIST_FILTER}" |
+    gum table --separator=$'\t' --columns="ID,Description,Files,Visibility,UpdatedAt" "$@"
+
+}
+
+function tip-list() {
+  print-launch-message "Your Tips !" "Browse Tips List !!"
+
+  browse-gist-list --print
+}
+
