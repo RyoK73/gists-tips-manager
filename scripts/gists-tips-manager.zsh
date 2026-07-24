@@ -93,20 +93,21 @@ function tip-new() {
   local created_date="$(date "+%Y-%m-%d")"
   local category_yaml="[$(echo "${category}" | paste -sd, - | sed 's/,/, /g')]" # yaml形式の配列に変換
 
-  touch ${fullpath}
-  echo <<-EOF >"${save_dir}/${created_date}-${filename}.meta.yaml"
-    ---
-    title: ${title}
-    category: ${category_yaml}
-    created_at: ${created_date}
-    ---
-EOF
+  local tip_name="${created_date}-${filename}"
+  local tip_dir="${TIPS_DIR}/${tip_name}"
 
-  if $(gum confirm "${EDITOR}で開きますか？"); then
-    $EDITOR "${fullpath}"
-  else
-    echo "$(dirname "${fullpath}")に作成しました"
-  fi
+  mkdir -p "${tip_dir}"
+  touch "${tip_dir}/${filename}.${extension}"
+  cat <<-EOF >"${tip_dir}/${filename}.meta.yaml"
+	---
+	title: ${title}
+	category: ${category_yaml}
+	created_at: ${created_date}
+	gist_id: ""
+  ---
+	EOF
+
+  edit-and-maybe-upload "${tip_dir}" "${filename}.${extension}"
 }
 
 function browse-gist-list() {
